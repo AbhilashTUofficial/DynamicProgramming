@@ -145,7 +145,7 @@ write a function gridTraveler(m,n) that calculates this.
 		if(n===0) return[];
 		if(n<0) return null;
 		for(let num of arr){
-			const remainder=n-m;
+			const remainder=n-num;
 			const remainderResult=howSum(remainder,arr);
 			if(remainderResult !== null){
 				return [...remainderResult, num];
@@ -215,20 +215,82 @@ write a function gridTraveler(m,n) that calculates this.
 | With Memoization | Space Complexity : O(m^2) | Time Complexity : O(m^2*n) |
 |-----|-----|-----|
 
-	const howSum=(n, arr,memo={})=>{
-	if(n in memo) return memo[n];
-	if(n===0) return[];
-	if(n<0) return null;
+	const bestSum=(n,arr,memo={})=>{
+		if(n in memo) return memo[n];
+		if(n===0) return[];
+		if(n<0) return null;
+		let shortestCombination=null;
+		for (let num of arr){
+			const remainder=n-num;
+			const remainderCombination=bestSum(remainder,arr,memo);
+			if(remainderCombination!==null){
+				const combination= [...remainderCombination,num];
+				if(shortestCombination===null || combination.length<shortestCombination.length){
+					shortestCombination=combination;
+				}
+			}
+		}
+		memo[n]=shortestCombination;
+		return memo[n];
+	};
+
+<br/><br/>
+
+## Problem 6 - canConstruct
+<details>
+<pre>
+ Write a function can Construct(n,wordBank) that accepts a
+ target string and an array of strings.
+
+ The function should return a boolean indicating whether or not the
+ target can be constructed by concatenating elements of the 
+ wordBank array.
+</pre>
+</details>
+
+| Without Memoization | Space Complexity : O(m^2) | Time Complexity: O(n^m*m) |
+|-----|-----|-----|
+
+	const bestSum=(n,arr)=>{
+	if(n===0)return [];
+	if(n<0)return null;
+	let shortestCombination=null;
 	for(let num of arr){
 		const remainder=n-num;
-		const remainderResult=howSum(remainder,arr,memo);
-		if(remainderResult !== null){
-		memo[n]=[ ...remainderResult, num];
-		return memo[n];
+		const remainderCombination=bestSum(remainder,arr);
+		if(remainderCombination !== null){
+			const combination=[ ...remainderCombination, num];	
+			if(shortestCombination === null || combination.length<shortestCombination.length){
+				shortestCombination=combination;
+			}
 		}
+		
 	}
-	memo[n]=null;
-	return null;
+	
+	return shortestCombination;	
 };
+
+
+| With Memoization | Space Complexity : O(m^2) | Time Complexity : O(m^2*n) |
+|-----|-----|-----|
+
+	const bestSum=(n,arr,memo={})=>{
+		if(n in memo) return memo[n];
+		if(n===0) return[];
+		if(n<0) return null;
+		let shortestCombination=null;
+		for (let num of arr){
+			const remainder=n-num;
+			const remainderCombination=bestSum(remainder,arr,memo);
+			if(remainderCombination!==null){
+				const combination= [...remainderCombination,num];
+				if(shortestCombination===null || combination.length<shortestCombination.length){
+					shortestCombination=combination;
+				}
+			}
+		}
+		memo[n]=shortestCombination;
+		return memo[n];
+	};
 
 <br/><br/>

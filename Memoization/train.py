@@ -1,10 +1,10 @@
 
 def run():
 	memo={}
-	#print(fib(7, memo))
+	print(fib(30, memo))
 	#print(gridTraveler(18, 18, memo))
 	#print(canSum(300,[7,14],memo))
-	print(howSum(7,[2,4],memo))
+	#print(howSum(7,[2,4],memo))
 	
 	
 def fib(n, memo):

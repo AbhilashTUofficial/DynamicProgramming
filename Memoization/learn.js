@@ -76,8 +76,16 @@ const bestSum=(n,arr,memo={})=>{
 	return memo[n];
 };
 
-console.log(bestSum(100,[25,3,4,7]));
+// Problem 6 -> canConstruct
 
+const canConstruct=(n,arr)=>{
+	if(n==="")return true;
+	for(let str of arr){
+		if( str.indexOf(str)===0){
+			const s
+		}
+	}
+};
 
 
 
