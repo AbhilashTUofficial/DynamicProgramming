@@ -78,15 +78,44 @@ const bestSum=(n,arr,memo={})=>{
 
 // Problem 6 -> canConstruct
 
-const canConstruct=(n,arr)=>{
-	if(n==="")return true;
+const canConstruct=(n,arr,memo={})=>{
+	if(n in memo) return memo[n];
+	if(n ==='')	return true;
+	
 	for(let str of arr){
-		if( str.indexOf(str)===0){
-			const s
+		if( n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			if(canConstruct(suffix,arr,memo) === true){
+				memo[n]=true;
+				return memo[n];
+			}
 		}
 	}
+	memo[n]= false;
+	return memo[n];
 };
 
+// Problem 7 -> countConstruct
+
+const countConstruct=(n,arr,memo={})=>{
+	if(n in memo) return memo[n];
+	if(n== '') return 1;
+
+	let totalWays=0;
+	for(let str of arr){
+		if(n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			const numWayForRest=countConstruct(suffix,arr,memo);
+			memo[n]=numWayForRest;
+			totalWays+=memo[n];
+		}
+	}
+	memo[n]=totalWays;
+	return memo[n];
+
+};
+
+console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",["e","ee","eee","eeee"]))
 
 
 

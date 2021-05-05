@@ -239,58 +239,156 @@ write a function gridTraveler(m,n) that calculates this.
 ## Problem 6 - canConstruct
 <details>
 <pre>
- Write a function can Construct(n,wordBank) that accepts a
- target string and an array of strings.
+Write a function can Construct(n,wordBank) that accepts a
+target string and an array of strings.
 
- The function should return a boolean indicating whether or not the
- target can be constructed by concatenating elements of the 
- wordBank array.
+The function should return a boolean indicating whether or not the
+target can be constructed by concatenating elements of the 
+wordBank array.
 </pre>
 </details>
 
-| Without Memoization | Space Complexity : O(m^2) | Time Complexity: O(n^m*m) |
+| Without Memoization | Space Complexity : O(n^m*m) | Time Complexity: O(m^2) |
 |-----|-----|-----|
 
-	const bestSum=(n,arr)=>{
-	if(n===0)return [];
-	if(n<0)return null;
-	let shortestCombination=null;
-	for(let num of arr){
-		const remainder=n-num;
-		const remainderCombination=bestSum(remainder,arr);
-		if(remainderCombination !== null){
-			const combination=[ ...remainderCombination, num];	
-			if(shortestCombination === null || combination.length<shortestCombination.length){
-				shortestCombination=combination;
-			}
-		}
-		
-	}
+	const canConstruct=(n,arr)=>{
+	if(n ==='')	return true;
 	
-	return shortestCombination;	
-};
-
-
-| With Memoization | Space Complexity : O(m^2) | Time Complexity : O(m^2*n) |
-|-----|-----|-----|
-
-	const bestSum=(n,arr,memo={})=>{
-		if(n in memo) return memo[n];
-		if(n===0) return[];
-		if(n<0) return null;
-		let shortestCombination=null;
-		for (let num of arr){
-			const remainder=n-num;
-			const remainderCombination=bestSum(remainder,arr,memo);
-			if(remainderCombination!==null){
-				const combination= [...remainderCombination,num];
-				if(shortestCombination===null || combination.length<shortestCombination.length){
-					shortestCombination=combination;
-				}
+	for(let str of arr){
+		if( n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			if(canConstruct(suffix,arr) === true){
+				return true;
 			}
 		}
-		memo[n]=shortestCombination;
-		return memo[n];
+	}
+	return false;
+	};
+
+
+| With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2 |
+|-----|-----|-----|
+
+	const canConstruct=(n,arr,memo={})=>{
+	if(n in memo) return memo[n];
+	if(n ==='')	return true;
+	
+	for(let str of arr){
+		if( n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			if(canConstruct(suffix,arr,memo) === true){
+				memo[n]=true;
+				return memo[n];
+			}
+		}
+	}
+	memo[n]= false;
+	return memo[n];
+	};
+
+<br/><br/>
+
+## Problem 7 - countConstruct
+<details>
+<pre>
+Write a function countConstruct(target, wordBank) that accepts a target string and an array of strings.
+
+The function should return the number of ways that the target can be constructed by concatenating elements of the wordBank array.
+
+You may reuse elements of wordBank as may times as needed.
+</pre>
+</details>
+
+| Without Memoization | Space Complexity : O(n^m*m) | Time Complexity: O(m^2) |
+|-----|-----|-----|
+
+	const countConstruct=(n,arr)=>{
+	if(n== '') return 1;
+
+	let totalWays=0;
+	for(let str of arr){
+		if(n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			const numWayForRest=countConstruct(suffix,arr);
+			totalWays+=numWayForRest;
+		}
+	}
+	return totalWays;
+	};
+
+
+| With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2 |
+|-----|-----|-----|
+
+	const countConstruct=(n,arr,memo={})=>{
+	if(n in memo) return memo[n];
+	if(n== '') return 1;
+
+	let totalWays=0;
+	for(let str of arr){
+		if(n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			const numWayForRest=countConstruct(suffix,arr,memo);
+			memo[n]=numWayForRest;
+			totalWays+=memo[n];
+		}
+	}
+	memo[n]=totalWays;
+	return memo[n];
+	};
+
+<br/><br/>
+
+## Problem 8 - allConstruct
+<details>
+<pre>
+Write a function allConstruct(target, wordBank) that accepts a target string and an array of strings.
+
+The function should return a 2D array containing all of the ways
+that the target can be constructed by concatenating elements of 
+the wordBank array. Each element of the 2D array should represent
+one combination that constructs the target.
+
+You may reuse elements of wordBank as may times as needed.
+</pre>
+</details>
+
+| Without Memoization | Space Complexity : O(n^m*m) | Time Complexity: O(m^2) |
+|-----|-----|-----|
+
+	const countConstruct=(n,arr)=>{
+	if(n== '') return 1;
+
+	let totalWays=0;
+	for(let str of arr){
+		if(n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			const numWayForRest=countConstruct(suffix,arr);
+			totalWays+=numWayForRest;
+		}
+	}
+	return totalWays;
+	};
+
+
+| With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2 |
+|-----|-----|-----|
+
+	const countConstruct=(n,arr,memo={})=>{
+	if(n in memo) return memo[n];
+	if(n== '') return 1;
+
+	let totalWays=0;
+	for(let str of arr){
+		if(n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			const numWayForRest=countConstruct(suffix,arr,memo);
+			memo[n]=numWayForRest;
+			totalWays+=memo[n];
+		}
+	}
+	memo[n]=totalWays;
+	return memo[n];
 	};
 
 <br/><br/>
