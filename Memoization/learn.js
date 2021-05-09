@@ -115,7 +115,26 @@ const countConstruct=(n,arr,memo={})=>{
 
 };
 
-console.log(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",["e","ee","eee","eeee"]))
+// Problem 8 -> allConstruct
+
+const allConstruct=(n,arr,memo={})=>{
+	if(n in memo) return memo[n];
+	if( n === '' ) return [[]];
+	const result=[];
+	
+	for(let str of arr){
+		if(n.indexOf(str)===0){
+			const suffix=n.slice(str.length);
+			const suffixResult=allConstruct(suffix,arr,memo);
+			const compResult=suffixResult.map(comb=>[str, ...comb]);
+			result.push(...compResult);
+		}
+	}
+	memo[n]=result;
+	return memo[n];
+};
+
+console.log(allConstruct("purple",["purp","p","ur","le","purpl"]));
 
 
 
