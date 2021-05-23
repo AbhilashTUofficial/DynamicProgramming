@@ -1,15 +1,13 @@
-# Memoization
+# Tabulation
 <br/>
 
-## 1. Make it work.
+## 1. Steps
 - Visualize the problem as a tree.
-- Implement the tree using recursion.
-- test it.
-
-## 2. Make it efficient.
-- Add a memo object.
-- Add a base case to return memo values.
-- Store the return values into the memo.
+- Size the table based on the inputs.
+- Initialize the table with default values.
+- seed the trivial answer into the table.
+- Iterate through the table.
+- fill further positions based on the current position.
 
 <br/><br/>
 
@@ -25,23 +23,18 @@ js object, keys will be arg to fn, value will be the return value.
 </pre>
 </details>
 
-| Without Memoization | Space Complexity : O(n) | Time Complexity: O(2^n) |
+| With Tabulation | Space Complexity : O(n) | Time Complexity : O(n) |
 |-----|-----|-----|
 
 	const fib=(n)=>{
-		if(n<=2)return 1;
-		return fib(n-1)+fib(n-2);
-	};
-
-| With Memoization | Space Complexity : O(n) | Time Complexity : O(n) |
-|-----|-----|-----|
-
-	const fib=(n, memo={})=>{
-		if(n in memo)return memo[n];
-		if(n<=2)return 1;
-		memo[n] = fib(n-1,memo)+fib(n-2,memo);
-		return memo[n];
-	};
+    const table=Array(n+1).fill(0);
+    table[1]=1;
+    for(let i=0;i<=n;i++){
+        table[i+1]+=table[i];
+        table[i+2]+=table[i];
+    }
+    return table[n];
+	}
 
 <br/><br/>
 
@@ -56,25 +49,23 @@ write a function gridTraveler(m,n) that calculates this.
 </pre>
 </details>
 
-| Without Memoization | Space Complexity : O(n) | Time Complexity: O(2^n) |
+
+| With Tabulation | Space Complexity : O(m*n) | Time Complexity : O(m*n) |
 |-----|-----|-----|
 
 	const gridTraveler=(m,n)=>{
-		if(m===1 && n===1) return 1;
-		if(m===0 || n===0) return 0;
-		return gridTraveler(m-1,n)+gridTraveler(m.n-1);
-	};
-
-| With Memoization | Space Complexity : O(n) | Time Complexity : O(n) |
-|-----|-----|-----|
-
-	const gridTraveler=(m,n,memo={})=>{
-		const key=m+','+n;
-		if(key in memo) return memo[key];
-		if(m===1 && n===1) return 1;
-		if(m===0 || n===0)return 0;
-		memo[key]= gridTraveler(m-1,n,memo)+gridTraveler(m,n-1,memo);
-		return memo[key];
+    const table=Array(m+1).fill().map(
+        ()=> Array(n+1).fill(0)
+    )
+    table[1][1]=1;
+    for(let i=0;i<=n;i++){
+        for(let j=0;j<=m;j++){
+            const current=table[i][j];
+            if(j+1<=n)table[i][j+1]+= current;
+            if(i+1<=m)table[i+1][j]+= current;
+        }
+    }
+    return table[m][n];
 	};
 
 <br/><br/>
@@ -89,38 +80,21 @@ write a function gridTraveler(m,n) that calculates this.
 </pre>
 </details>
 
-| Without Memoization | Space Complexity : O(m) | Time Complexity: O(n^m) |
+| With Tabulation | Space Complexity : O(m) | Time Complexity : O(n) |
 |-----|-----|-----|
 
-	const canSum=(n, arr)=>{
-		if(n===0) return true;
-		if(n<0) return false;
-		for(let num of arr){
-			const remainder=n-m;
-			if(canSum(remainder,arr)===true){
-				return true;
+	const canSum=(n,numbers)=>{
+		const table=Array(n+1).fill(false);
+		table[0]=true;
+		for(let i=0;i<=n;i++){
+			if(table[i]===true){
+				for(let num of numbers){
+					table[i+num]=true;
+				}
 			}
 		}
-		return false;
-	};
-
-| With Memoization | Space Complexity : O(m) | Time Complexity : O(n) |
-|-----|-----|-----|
-
-	const canSum=(n, arr,memo={})=>{
-		if(n in memo)return memo[n];
-		if(n===0)return true;
-		if(n<0)return false;
-		for(let num of arr){
-			const remainder=n-num;
-			if(canSum(remainder,arr,memo) === true) {
-				memo[n]=true;
-				return true;
-			}
-		}
-		memo[n]=false;
-		return false;
-	};
+		return table[n];
+	}
 
 <br/><br/>
 

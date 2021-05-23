@@ -96,7 +96,7 @@ write a function gridTraveler(m,n) that calculates this.
 		if(n===0) return true;
 		if(n<0) return false;
 		for(let num of arr){
-			const remainder=n-m;
+			const remainder=n-num;
 			if(canSum(remainder,arr)===true){
 				return true;
 			}
