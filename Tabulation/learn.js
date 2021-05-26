@@ -41,7 +41,41 @@ const canSum=(n,numbers)=>{
         }
     }
     return table[n];
-}
+};
+
+// Problem 4 -> howSum
+
+const howSum=(n,numbers)=>{
+    const table=Array(n+1).fill(null);
+    table[0]=[];
+    for(let i=0;i<=n;i++){
+        if(table[i]!=null){
+            for(let num of numbers){
+                table[i+num]=[...table[i],num];
+            }
+        }
+    }
+    return table[n];
+};
+
+// Problem 5 -> bestSum
+
+const bestSum=(n,numbers)=>{
+    const table=Array(n+1).fill(null);
+    table[0]=[];
+    for(let i=0;i<=n;i++){
+        if(table[i]!=null){
+            for(let num of numbers){
+                const combination=[...table[i],num];
+                if(!table[i+num] || table[i+num].length>combination.length){
+                    table[i+num]= combination;
+                }
+            }
+        }
+    }
+    return table[n];
+};
 
 
-console.log(canSum(7,[5,3,4,7]));
+
+console.log(bestSum(8,[5,3,2]));
