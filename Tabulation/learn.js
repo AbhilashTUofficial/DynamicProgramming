@@ -76,6 +76,25 @@ const bestSum=(n,numbers)=>{
     return table[n];
 };
 
+// Problem 6 -> canConstruct
+
+const canConstruct=(n,wordBank)=>{
+    const table=Array(n+1).fill(false);
+    table[0]=true;
+    for(let i=0;i<=n.length;i++){
+        if(table[i]===true){
+            for(let word of wordBank){
+                if(n.slice(i,i+word.length)=== word){
+                    table[i+word.length]=true;
+                }
+            }
+        }
+    }
+    return table[n.length];
+};
+
+// Problem 7 -> countConstruct
 
 
-console.log(bestSum(8,[5,3,2]));
+
+console.log(canConstruct("abcdef",["ab","abc","cd","def","abcd"]));

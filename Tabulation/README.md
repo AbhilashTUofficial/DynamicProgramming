@@ -177,24 +177,22 @@ wordBank array.
 </pre>
 </details>
 
-| With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2 |
+| With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2) |
 |-----|-----|-----|
 
-	const canConstruct=(n,arr,memo={})=>{
-	if(n in memo) return memo[n];
-	if(n ==='')	return true;
-	
-	for(let str of arr){
-		if( n.indexOf(str)===0){
-			const suffix=n.slice(str.length);
-			if(canConstruct(suffix,arr,memo) === true){
-				memo[n]=true;
-				return memo[n];
-			}
-		}
-	}
-	memo[n]= false;
-	return memo[n];
+	const canConstruct=(n,wordBank)=>{
+    const table=Array(n+1).fill(false);
+    table[0]=true;
+    for(let i=0;i<=n.length;i++){
+        if(table[i]===true){
+            for(let word of wordBank){
+                if(n.slice(i,i+word.length)=== word){
+                    table[i+word.length]=true;
+                }
+            }
+        }
+    }
+    return table[n.length];
 	};
 
 <br/><br/>
@@ -209,24 +207,6 @@ The function should return the number of ways that the target can be constructed
 You may reuse elements of wordBank as may times as needed.
 </pre>
 </details>
-
-| Without Memoization | Space Complexity : O(n^m*m) | Time Complexity: O(m^2) |
-|-----|-----|-----|
-
-	const countConstruct=(n,arr)=>{
-	if(n== '') return 1;
-
-	let totalWays=0;
-	for(let str of arr){
-		if(n.indexOf(str)===0){
-			const suffix=n.slice(str.length);
-			const numWayForRest=countConstruct(suffix,arr);
-			totalWays+=numWayForRest;
-		}
-	}
-	return totalWays;
-	};
-
 
 | With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2) |
 |-----|-----|-----|
