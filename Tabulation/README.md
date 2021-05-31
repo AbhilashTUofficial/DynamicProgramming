@@ -208,25 +208,22 @@ You may reuse elements of wordBank as may times as needed.
 </pre>
 </details>
 
-| With Memoization | Space Complexity : O(n*m^2) | Time Complexity : O(m^2) |
+| With Tabulation | Space Complexity : O(n*m^2) | Time Complexity : O(m^2) |
 |-----|-----|-----|
 
-	const countConstruct=(n,arr,memo={})=>{
-	if(n in memo) return memo[n];
-	if(n== '') return 1;
-
-	let totalWays=0;
-	for(let str of arr){
-		if(n.indexOf(str)===0){
-			const suffix=n.slice(str.length);
-			const numWayForRest=countConstruct(suffix,arr,memo);
-			memo[n]=numWayForRest;
-			totalWays+=memo[n];
-		}
+	const countConstruct=(n,wordBank)=>{
+    const table=Array(n.length+1).fill(0);
+    table[0]=1;
+    for(let i=0;i<=n.length;i++){
+     for(let word of wordBank){
+         if(n.slice(i,i+word.length)=== word){
+             table[i+word.length]+=table[i];
+         }
+       }   
+    }
+    return table[n.length];
 	}
-	memo[n]=totalWays;
-	return memo[n];
-	};
+
 
 <br/><br/>
 
@@ -244,43 +241,22 @@ You may reuse elements of wordBank as may times as needed.
 </pre>
 </details>
 
-| Without Memoization | Space Complexity : O(m) | Time Complexity: O(n^m) |
+| With Tabulation | Space Complexity : O(n^m) | Time Complexity : O(n^m) |
 |-----|-----|-----|
 
-	const allConstruct=(n,arr)=>{
-
-	if( n === '' ) return [[]];
-	const result=[];
-	
-	for(let str of arr){
-		if(n.indexOf(str)===0){
-			const suffix=n.slice(str.length);
-			const suffixResult=allConstruct(suffix,arr);
-			const compResult=suffixResult.map(comb=>[str, ...comb]);
-			result.push(...compResult);
-		}
+	const allConstruct=(n,wordBank)=>{
+    const table=Array(n.length+1).fill().map(()=>[]);
+    table[0]=[[]];
+    for(let i=0;i<=n.length;i++){
+        for(let word of wordBank){
+            if(n.slice(i,i+word.length)=== word){
+                const newComb=table[i].map(subArray=>[...subArray,word]);
+                table[i+word.length].push(...newComb);
+            }
+        }
+    }
+    return table[n.length];
 	}
-	return result;
-	};
 
-| With Memoization | Space Complexity : O(m) | Time Complexity : O(n^) |
-|-----|-----|-----|
-
-	const allConstruct=(n,arr,memo={})=>{
-	if(n in memo) return memo[n];
-	if( n === '' ) return [[]];
-	const result=[];
-	
-	for(let str of arr){
-		if(n.indexOf(str)===0){
-			const suffix=n.slice(str.length);
-			const suffixResult=allConstruct(suffix,arr,memo);
-			const compResult=suffixResult.map(comb=>[str, ...comb]);
-			result.push(...compResult);
-		}
-	}
-	memo[n]=result;
-	return memo[n];
-	};
 
 <br/><br/>

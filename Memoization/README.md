@@ -372,7 +372,7 @@ You may reuse elements of wordBank as may times as needed.
 	return result;
 	};
 
-| With Memoization | Space Complexity : O(m) | Time Complexity : O(n^) |
+| With Memoization | Space Complexity : O(m) | Time Complexity : O(n^m) |
 |-----|-----|-----|
 
 	const allConstruct=(n,arr,memo={})=>{

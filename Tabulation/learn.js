@@ -30,6 +30,7 @@ const gridTraveler=(m,n)=>{
 };
 
 // Problem 3 -> canSum
+
 const canSum=(n,numbers)=>{
     const table=Array(n+1).fill(false);
     table[0]=true;
@@ -95,6 +96,33 @@ const canConstruct=(n,wordBank)=>{
 
 // Problem 7 -> countConstruct
 
+const countConstruct=(n,wordBank)=>{
+    const table=Array(n.length+1).fill(0);
+    table[0]=1;
+    for(let i=0;i<=n.length;i++){
+     for(let word of wordBank){
+         if(n.slice(i,i+word.length)=== word){
+             table[i+word.length]+=table[i];
+         }
+     }   
+    }
+    return table[n.length];
+}
 
+// Problem 8 -> allConstruct
 
-console.log(canConstruct("abcdef",["ab","abc","cd","def","abcd"]));
+const allConstruct=(n,wordBank)=>{
+    const table=Array(n.length+1).fill().map(()=>[]);
+    table[0]=[[]];
+    for(let i=0;i<=n.length;i++){
+        for(let word of wordBank){
+            if(n.slice(i,i+word.length)=== word){
+                const newComb=table[i].map(subArray=>[...subArray,word]);
+                table[i+word.length].push(...newComb);
+            }
+        }
+    }
+    return table[n.length];
+}
+
+console.log(allConstruct('purple',['purp','p','ur','le','purpl']));
