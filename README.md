@@ -12,13 +12,14 @@ Dynamic programming is both a mathematical optimization method and a computer pr
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AbhilashTUofficial/DynamicProgramming?color=blue&label=Repo%20Size%3A&style=for-the-badge)
 
 ## Problems
-- Fibonacci [Memoization]() and [Tabulation]()
-- Grid Traveler [Memoization]() and [Tabulation]()
-- Can Sum [Memoization]() and [Tabulation]()
-- How Sum [Memoization]() and [Tabulation]()
-- Best Sum [Memoization]() and [Tabulation]()
-- Can Construct [Memoization]() and [Tabulation]()
-- All Construct [Memoization]() and [Tabulation]()
+- Fibonacci [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L3) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L3)
+- Grid Traveler [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L14) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L15)
+- Can Sum [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L23) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L32)
+- How Sum [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L40) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L47)
+- Best Sum [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L58) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L62)
+- Can Construct [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L79) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L80)
+- Count Construct [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L98) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L97)
+- All Construct [Memoization](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Memoization/learn.js#L118) and [Tabulation](https://github.com/AbhilashTUofficial/DynamicProgramming/blob/85e4709fb1195918f18df007ed9125736e089eb2/Tabulation/learn.js#L112)
 
 ### Reference
 - [Dynamic programming YouTube Tutorial](https://www.youtube.com/watch?v=oBt53YbR9Kk&t=16694s)
